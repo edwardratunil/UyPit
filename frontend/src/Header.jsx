@@ -125,7 +125,7 @@ const Header = ({ onLogout, toggleSidebar, sidebarRef, isSidebarOpen }) => {
     <div className="h-20 px-4 flex justify-between items-center border-b border-gray-100 bg-white text-black">
       <div className="flex items-center">
         <img
-          src="src/Logo 1.png" // Replace with the path to your logo
+          src="src/Logo 4.png"
           alt="Logo"
           className="h-10 cursor-pointer"
           onClick={() => navigate('/dashboard')}

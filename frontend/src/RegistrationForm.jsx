@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineUser, AiOutlineLock, AiOutlineHome, AiOutlineCalendar, AiOutlineMail } from 'react-icons/ai'; 
-import HeaderLogo from './Logo 1.png';
+import HeaderLogo from './Logo 4.png';
 import axiosInstance from './axiosConfig';
 import { Helmet, HelmetProvider} from 'react-helmet-async';
 import Swal from 'sweetalert2';
@@ -45,7 +45,7 @@ const RegistrationForm = () => {
 
       if (registrationResponse.data) {
         const loginData = { email, password };
-        const loginResponse = await axiosInstance.post('/login', loginData);
+        const loginResponse = await axiosInstance.post('/dashboard', loginData);
         console.log('Login response:', loginResponse);
 
         if (loginResponse.data) {

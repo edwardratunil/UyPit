@@ -4,8 +4,8 @@ import classNames from 'classnames';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useUser } from './UserContext'; // Import the UserContext
 import { useTheme } from './App';
-import HeaderLogo from './Logo 3.png';
-import HeaderLogo2 from './Logo 1.png';
+import HeaderLogo from './Logo 4.png';
+import HeaderLogo2 from './Logo 4.png';
 import { NavLink } from 'react-router-dom';
 import { MdLogout } from "react-icons/md";
 import { DASHBOARD_SIDEBAR_LINKS, DASHBOARD_SIDEBAR_BOTTOM_LINKS, ADMIN_LINKS } from './navigation';

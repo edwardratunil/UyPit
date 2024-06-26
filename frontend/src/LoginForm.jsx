@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from './axiosConfig';
-import HeaderLogo from './Logo 2.png';
+import HeaderLogo from './Logo 4.png';
 import { AiOutlineLock, AiOutlineMail } from 'react-icons/ai';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
