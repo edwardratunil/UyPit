@@ -12,7 +12,7 @@ import { DASHBOARD_SIDEBAR_LINKS, DASHBOARD_SIDEBAR_BOTTOM_LINKS, ADMIN_LINKS } 
 
 const SidebarContext = createContext(); // Create context here
 
-const linkClasses = 'rounded-lg flex items-center gap-2 font-light px-3 py-2 hover:bg-indigo-300 hover:no-underline active:bg-indigo-500 text-base';
+const linkClasses = 'rounded-lg flex items-center gap-2 font-light px-3 py-2 hover:bg-gray-300 hover:no-underline active:bg-gray-500 text-base';
 
 const Sidebar = forwardRef(({ onLogout, isOpen }, ref) => {
   const { theme } = useTheme();
@@ -89,7 +89,7 @@ function SidebarItem({ item }) {
 
   return (
     <li className={classNames(
-      pathname === item.path ? 'bg-indigo-500 text-white rounded-lg' : 'text-black rounded-lg',
+      pathname === item.path ? 'bg-gray-500 text-white rounded-lg' : 'text-black rounded-lg',
       linkClasses,
       `relative flex items-center py-2 px-3 my-1 font-medium rounded-lg cursor-pointer transition-colors group ${theme === 'dark' ? 'text-white' : 'text-black'}`
     )}>
@@ -100,14 +100,14 @@ function SidebarItem({ item }) {
         </span>
       </Link>
       {item.alert && (
-        <div className={`absolute right-2 w-2 h-2 bg-indigo-400 rounded-lg ${expanded ? "" : "top-2"}`} />
+        <div className={`absolute right-2 w-2 h-2 bg-gray-400 rounded-lg ${expanded ? "" : "top-2"}`} />
       )}
       {!expanded && (
         <div className={`
           absolute left-full rounded-lg px-2 py-1 ml-6
           text-black text-sm 
           invisible opacity-20 -translate-x-3 transition-all
-          group-hover:visible group-hover:opacity-100 group-hover:translate-x-0 ${theme === 'dark' ? 'text-gray-700 bg-indigo-300' : 'text-black bg-indigo-300'}
+          group-hover:visible group-hover:opacity-100 group-hover:translate-x-0 ${theme === 'dark' ? 'text-gray-700 bg-gray-300' : 'text-black bg-gray-300'}
         `}>
           {item.label}
         </div>

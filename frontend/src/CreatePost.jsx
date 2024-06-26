@@ -44,7 +44,7 @@ const CreatePost = () => {
         <select
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 text-black focus:ring-indigo-500 mb-4"
+          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 text-black focus:ring-gray-500 mb-4"
         >
           <option value="">Select Category</option>
           <option value="Dress">Dress</option>
@@ -56,11 +56,11 @@ const CreatePost = () => {
         <input
           type="file"
           onChange={(e) => setFile(e.target.files[0])}
-          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4"
+          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 mb-4"
         />
         <button
           type="submit"
-          className="w-full py-2 px-4 bg-indigo-600 hover:bg-indigo-700 rounded-md text-white transition duration-200"
+          className="w-full py-2 px-4 bg-gray-600 hover:bg-gray-700 rounded-md text-white transition duration-200"
         >
           Post
         </button>

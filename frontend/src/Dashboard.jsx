@@ -162,7 +162,7 @@ const Dashboard = () => {
         <meta name="viewport" content="width=device-width, initial-scale=0.50, maximum-scale=1.0, user-scalable=yes" />
       </Helmet>
 
-      <div className="flex flex-row h-[91vh] overflow-auto bg-white-100 justify-center">
+      <div className="flex flex-row h-[91vh] overflow-auto bg-white justify-center">
         <div className="col-span-2 space-y-4 w-[50rem]">
           <div className="md:col-span-2 space-y-4 w-full md:w-[50rem]">
             <div className="space-y-4">

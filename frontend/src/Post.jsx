@@ -17,7 +17,7 @@ const Post = ({
   handleCancel,
   lastPostElementRef
 }) => (
-  <div ref={lastPostElementRef} className="mb-4 p-4 rounded-xl mt-6 ml-15 mx-auto w-full md:w-[40rem] shadow-md bg-gray-100 text-black">
+  <div ref={lastPostElementRef} className="mb-4 p-4 rounded-xl mt-6 ml-15 mx-auto w-full md:w-[40rem] shadow-md bg-gray-200 text-black">
     <div className="items-center mb-2 flex mt-18">
       {post.user?.profile_image_url ? (
         <img src={post.user.profile_image_url} alt="Profile" className="w-10 h-10 rounded-full mr-4" />
@@ -47,11 +47,6 @@ const Post = ({
           <div className="absolute top-full left-0 bg-white border border-gray-300 rounded-lg w-28 flex py-2">
             <ul className="text-sm text-gray-700 w-28 items-center">
               <li>
-                <a href="#" onClick={() => handleEdit(post.id, post.content)} className="px-2 py-2 hover:bg-gray-200 p-2 flex items-center mb-2 relative">
-                  Edit
-                </a>
-              </li>
-              <li>
                 <a href="#" onClick={() => handleDelete(post.id)} className="px-2 py-2 hover:bg-gray-200 p-2 flex items-center mb-2 relative">
                   Delete
                 </a>
@@ -70,12 +65,12 @@ const Post = ({
         <input
           value={editContent}
           onChange={handleEditContentChange}
-          className="w-full h-20 px-3 py-2 bg-gray-200 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full h-20 px-3 py-2 bg-gray-200 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-500"
         />
         <div className="flex space-x-2 mt-2">
           <button
             onClick={() => handleUpdate(post.id)}
-            className="mt-3 py-2 px-3 text-xs bg-indigo-600 hover:bg-indigo-700 rounded-xl transition duration-200 text-white"
+            className="mt-3 py-2 px-3 text-xs bg-gray-600 hover:bg-gray-700 rounded-xl transition duration-200 text-white"
           >
             Update
           </button>

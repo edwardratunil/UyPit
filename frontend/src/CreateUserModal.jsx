@@ -1,7 +1,5 @@
-// CreateUserModal.jsx
 import React, { useState } from 'react';
 import axiosInstance from './axiosConfig';
-import { useTheme } from './App'; // Assuming the theme context is in App.js
 
 const CreateUserModal = ({ isOpen, onClose, onCreate }) => {
   const [formData, setFormData] = useState({
@@ -14,8 +12,6 @@ const CreateUserModal = ({ isOpen, onClose, onCreate }) => {
     gender: 'Male',
     role: 'user',
   });
-
-  const { theme } = useTheme();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,7 +41,7 @@ const CreateUserModal = ({ isOpen, onClose, onCreate }) => {
 
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
-      <div className={`p-6 rounded-lg shadow-lg w-full max-w-md ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
+      <div className="p-6 rounded-lg shadow-lg w-full max-w-md bg-white text-black">
         <h2 className="text-xl font-bold mb-4">Create User</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -55,7 +51,7 @@ const CreateUserModal = ({ isOpen, onClose, onCreate }) => {
               name="first_name"
               value={formData.first_name}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded ${theme === 'dark' ? 'bg-gray-700 text-white' : 'bg-white text-black'}`}
+              className="w-full px-3 py-2 border rounded bg-white text-black"
               required
             />
           </div>
@@ -66,7 +62,7 @@ const CreateUserModal = ({ isOpen, onClose, onCreate }) => {
               name="last_name"
               value={formData.last_name}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded ${theme === 'dark' ? 'bg-gray-700 text-white' : 'bg-white text-black'}`}
+              className="w-full px-3 py-2 border rounded bg-white text-black"
               required
             />
           </div>
@@ -77,7 +73,7 @@ const CreateUserModal = ({ isOpen, onClose, onCreate }) => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded ${theme === 'dark' ? 'bg-gray-700 text-white' : 'bg-white text-black'}`}
+              className="w-full px-3 py-2 border rounded bg-white text-black"
               required
             />
           </div>
@@ -88,7 +84,7 @@ const CreateUserModal = ({ isOpen, onClose, onCreate }) => {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded ${theme === 'dark' ? 'bg-gray-700 text-white' : 'bg-white text-black'}`}
+              className="w-full px-3 py-2 border rounded bg-white text-black"
               required
             />
           </div>
@@ -99,7 +95,7 @@ const CreateUserModal = ({ isOpen, onClose, onCreate }) => {
               name="address"
               value={formData.address}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded ${theme === 'dark' ? 'bg-gray-700 text-white' : 'bg-white text-black'}`}
+              className="w-full px-3 py-2 border rounded bg-white text-black"
             />
           </div>
           <div className="mb-4">
@@ -109,7 +105,7 @@ const CreateUserModal = ({ isOpen, onClose, onCreate }) => {
               name="birthdate"
               value={formData.birthdate}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded ${theme === 'dark' ? 'bg-gray-700 text-white' : 'bg-white text-black'}`}
+              className="w-full px-3 py-2 border rounded bg-white text-black"
             />
           </div>
           <div className="mb-4">
@@ -118,11 +114,11 @@ const CreateUserModal = ({ isOpen, onClose, onCreate }) => {
               name="gender"
               value={formData.gender}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded ${theme === 'dark' ? 'bg-gray-700 text-white' : 'bg-white text-black'}`}
+              className="w-full px-3 py-2 border rounded bg-white text-black"
             >
-              <option value="Male" className={`${theme === 'dark' ? 'bg-gray-700 text-white' : 'bg-white text-black'}`}>Male</option>
-              <option value="Female" className={`${theme === 'dark' ? 'bg-gray-700 text-white' : 'bg-white text-black'}`}>Female</option>
-              <option value="Other" className={`${theme === 'dark' ? 'bg-gray-700 text-white' : 'bg-white text-black'}`}>Other</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
             </select>
           </div>
           <div className="mb-4">
@@ -132,7 +128,7 @@ const CreateUserModal = ({ isOpen, onClose, onCreate }) => {
               name="role"
               value={formData.role}
               onChange={handleChange}
-              className="w-full px-3 py-2 border rounded"
+              className="w-full px-3 py-2 border rounded bg-white text-black"
             />
           </div>
           <div className="flex justify-end">

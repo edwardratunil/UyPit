@@ -1,7 +1,5 @@
-// EditUserModal.jsx
 import React, { useState, useEffect } from 'react';
 import axiosInstance from './axiosConfig';
-import { useTheme } from './App'; // Assuming the theme context is in App.js
 
 const EditUserModal = ({ isOpen, onClose, user, onUpdate }) => {
   const [formData, setFormData] = useState({
@@ -13,8 +11,6 @@ const EditUserModal = ({ isOpen, onClose, user, onUpdate }) => {
     gender: '',
     role: '',
   });
-
-  const { theme } = useTheme();
 
   useEffect(() => {
     if (user) {
@@ -54,7 +50,7 @@ const EditUserModal = ({ isOpen, onClose, user, onUpdate }) => {
 
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
-      <div className={`bg-white p-6 rounded-lg shadow-lg w-full max-w-md ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
+      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-xl font-bold mb-4">Edit User</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -116,11 +112,11 @@ const EditUserModal = ({ isOpen, onClose, user, onUpdate }) => {
               name="gender"
               value={formData.gender}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded ${theme === 'dark' ? 'bg-gray-700 text-white' : 'bg-white text-black'}`}
+              className="w-full px-3 py-2 border rounded"
             >
-              <option value="Male" className={`${theme === 'dark' ? 'bg-gray-700 text-white' : 'bg-white text-black'}`}>Male</option>
-              <option value="Female" className={`${theme === 'dark' ? 'bg-gray-700 text-white' : 'bg-white text-black'}`}>Female</option>
-              <option value="Other" className={`${theme === 'dark' ? 'bg-gray-700 text-white' : 'bg-white text-black'}`}>Other</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
             </select>
           </div>
           <div className="mb-4">
