@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Light mode */
+.light {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --input-bg-color: #f0f0f0;
+  --input-border-color: #cccccc;
+}
+
+/* Dark mode */
+.dark {
+  --bg-color: #1a202c;
+  --text-color: #ffffff;
+  --input-bg-color: #2d3748;
+  --input-border-color: #4a5568;
+}
+
+/* Apply the variables */
+body {
+  @apply bg-white text-black;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+body.dark {
+  @apply bg-gray-900 text-white;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+input, textarea {
+  @apply bg-gray-200 border-gray-300;
+  background-color: var(--input-bg-color);
+  border-color: var(--input-border-color);
+}
+
+body.dark input, body.dark textarea {
+  @apply bg-gray-700 border-gray-600;
+  background-color: var(--input-bg-color);
+  border-color: var(--input-border-color);
+}
