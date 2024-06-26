@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { HiOutlineSearch, HiOutlineHome, HiOutlineUser, HiOutlineUsers, HiOutlineChat, HiOutlineCog, HiOutlineBell, HiOutlineLogout} from 'react-icons/hi';
+import { HiOutlineSearch, HiOutlineHome, HiOutlineUser, HiOutlineUsers, HiOutlineCog, HiOutlineBell, HiOutlineLogout } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from './axiosConfig';
 
@@ -82,7 +82,6 @@ const Header = ({ onLogout, toggleSidebar, sidebarRef, isSidebarOpen }) => {
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
-
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     } else {
@@ -114,7 +113,6 @@ const Header = ({ onLogout, toggleSidebar, sidebarRef, isSidebarOpen }) => {
       } else if (notification.type === 'follow') {
         navigate(`/profile/${notification.related_id}`);
       }
-
       setShowNotifications(false);
     } catch (error) {
       console.error('Error deleting notification:', error);
@@ -122,7 +120,7 @@ const Header = ({ onLogout, toggleSidebar, sidebarRef, isSidebarOpen }) => {
   };
 
   return (
-    <div className="h-20 px-4 flex justify-between items-center border-b border-gray-100 bg-white text-black">
+    <div className="h-20 px-4 flex justify-between items-center border-b border-gray-100 bg-white text-black" ref={headerRef}>
       <div className="flex items-center">
         <img
           src="src/Logo 4.png"
@@ -139,76 +137,71 @@ const Header = ({ onLogout, toggleSidebar, sidebarRef, isSidebarOpen }) => {
             placeholder="Search users"
             value={searchQuery}
             onChange={handleSearchChange}
-            className="pl-10 pr-4 py-2 border rounded-full bg-gray-300"
+            className="pl-10 pr-4 py-2 border rounded-full bg-gray-300 w-96" // Adjust the width here
           />
           <button type="submit" className="ml-2 py-2 px-4 bg-gray-500 hover:bg-gray-700 rounded-full text-white">
             Search
           </button>
         </form>
+      </div>
+      <div className="flex items-center space-x-4">
         <HiOutlineHome
           fontSize={24}
-          className="cursor-pointer ml-4"
+          className="cursor-pointer"
           onClick={() => navigate('/dashboard')}
         />
-        <div className="flex items-center space-x-4 ml-4">
-          <div className="relative">
-            <HiOutlineBell
-              fontSize={24}
-              className="cursor-pointer"
-              onClick={toggleNotifications}
-            />
-            {unreadCount > 0 && (
-              <span className="absolute top-0 right-0 inline-block w-4 h-4 bg-red-600 text-white text-xs leading-tight font-bold rounded-full text-center">
-                {unreadCount}
-              </span>
-            )}
-            {showNotifications && (
-              <div ref={dropdownRef} className="absolute mt-2 right-0 w-72 bg-white border border-gray-200 rounded-lg shadow-lg">
-                <ul>
-                  {notifications.map(notification => (
-                    <li
-                      key={notification.id}
-                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                      onClick={() => handleNotificationClick(notification)}
-                    >
-                      {notification.message}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-          <HiOutlineUser
+        <div className="relative">
+          <HiOutlineBell
             fontSize={24}
             className="cursor-pointer"
-            onClick={() => navigate(`/profile/${user?.id}`)}
+            onClick={toggleNotifications}
           />
-          <HiOutlineUsers
-            fontSize={24}
-            className="cursor-pointer"
-            onClick={() => navigate('/users')}
-          />
-          <HiOutlineChat
-            fontSize={24}
-            className="cursor-pointer"
-            onClick={() => navigate('/messages')}
-          />
-          <HiOutlineCog
-            fontSize={24}
-            className="cursor-pointer"
-            onClick={() => navigate('/settings')}
-          />
-          <button
-            onClick={() => navigate('/create')}
-            className="py-2 px-4 bg-green-500 hover:bg-green-600 rounded-full text-white transition duration-200">
-            Create
-          </button>
-          <HiOutlineLogout
-            fontSize={24}
-            className="cursor-pointer text-red-500"
-            onClick={handleLogout}
-          />
+          {unreadCount > 0 && (
+            <span className="absolute top-0 right-0 inline-block w-4 h-4 bg-red-600 text-white text-xs leading-tight font-bold rounded-full text-center">
+              {unreadCount}
+            </span>
+          )}
+          {showNotifications && (
+            <div ref={dropdownRef} className="absolute mt-2 right-0 w-72 bg-white border border-gray-200 rounded-lg shadow-lg">
+              <ul>
+                {notifications.map(notification => (
+                  <li
+                    key={notification.id}
+                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => handleNotificationClick(notification)}
+                  >
+                    {notification.message}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
+        <HiOutlineUser
+          fontSize={24}
+          className="cursor-pointer"
+          onClick={() => navigate(`/profile/${user?.id}`)}
+        />
+        <HiOutlineUsers
+          fontSize={24}
+          className="cursor-pointer"
+          onClick={() => navigate('/users')}
+        />
+        <HiOutlineCog
+          fontSize={24}
+          className="cursor-pointer"
+          onClick={() => navigate('/settings')}
+        />
+        <button
+          onClick={() => navigate('/create')}
+          className="py-2 px-4 bg-gray-500 hover:bg-gray-600 rounded-full text-white transition duration-200">
+          Create
+        </button>
+        <HiOutlineLogout
+          fontSize={24}
+          className="cursor-pointer text-red-500"
+          onClick={handleLogout}
+        />
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import moment from 'moment';
 import { useParams, useNavigate } from 'react-router-dom';
 import axiosInstance from './axiosConfig';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import logo from './Logo 4.png';
 
 const UserProfile = () => {
   const { userId } = useParams();
@@ -54,6 +55,11 @@ const UserProfile = () => {
       </Helmet>
 
       <div className="h-[91vh] overflow-auto bg-white text-black">
+        {/* Logo Section */}
+        <div className="flex justify-center mt-4">
+          <img src={logo} alt="Logo" className="h-16 w-auto" />
+        </div>
+
         <div className="flex flex-row justify-center"></div>
         <div className="bg-gray-400 p-4 h-56 rounded-2xl mt-6 ml-15 mx-auto w-[40rem]">
         </div>
@@ -167,4 +173,5 @@ const UserProfile = () => {
     </HelmetProvider>
   );
 };
+
 export default UserProfile;

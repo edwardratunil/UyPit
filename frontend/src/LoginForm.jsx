@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from './axiosConfig';
 import HeaderLogo from './Logo 4.png';
-import { AiOutlineLock, AiOutlineMail } from 'react-icons/ai';
+import { AiOutlineLock, AiOutlineMail, AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
@@ -19,9 +21,14 @@ const Login = ({ onLogin }) => {
       const response = await axiosInstance.post('/login', { email, password });
       const { token, user } = response.data;
 
-      // Save the token and user info in local storage
-      localStorage.setItem('authToken', token);
-      localStorage.setItem('user', JSON.stringify(user));
+      // Save the token and user info in local storage or session storage
+      if (rememberMe) {
+        localStorage.setItem('authToken', token);
+        localStorage.setItem('user', JSON.stringify(user));
+      } else {
+        sessionStorage.setItem('authToken', token);
+        sessionStorage.setItem('user', JSON.stringify(user));
+      }
 
       onLogin(); // Call the onLogin prop to update the isLoggedIn state in the App component
 
@@ -39,13 +46,18 @@ const Login = ({ onLogin }) => {
   const navigateToRegister = () => navigate('/register');
   const navigateToForgotPassword = () => navigate('/forgot-password');
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <HelmetProvider>
       <Helmet>
         <title>Login</title>
       </Helmet>
-      <div className="flex justify-center items-center h-screen bg-gray-100">
-        <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6">
+      <div className="relative flex justify-center items-center min-h-screen bg-cover bg-center" style={{ backgroundImage: `url('/src/backgroundimg.png')` }}>
+        <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-md"></div>
+        <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-6">
           <div className="flex flex-col items-center">
             <img 
               src={HeaderLogo} 
@@ -75,7 +87,7 @@ const Login = ({ onLogin }) => {
               <div className="relative">
                 <input
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-indigo-600 pl-10"
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -83,12 +95,30 @@ const Login = ({ onLogin }) => {
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3">
                   <AiOutlineLock className="h-5 w-5 text-gray-400" />
                 </div>
+                <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+                  <button type="button" onClick={togglePasswordVisibility} className="focus:outline-none">
+                    {showPassword ? <AiFillEyeInvisible className="h-5 w-5 text-gray-400" /> : <AiFillEye className="h-5 w-5 text-gray-400" />}
+                  </button>
+                </div>
                 {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password[0]}</p>}
+              </div>
+
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  id="remember-me"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                  className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                />
+                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                  Remember me
+                </label>
               </div>
 
               <button
                 type="submit"
-                className="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-4 py-2 bg-red-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
               >
                 Login
               </button>
