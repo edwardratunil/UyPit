@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from './axiosConfig';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import Post from './Post';
+import Masonry from 'react-masonry-css';
+import './index.css'; // Import the CSS file
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
@@ -155,6 +157,12 @@ const Dashboard = () => {
     return <div></div>;
   }
 
+  const breakpointColumnsObj = {
+    default: 3,
+    1100: 2,
+    700: 1
+  };
+
   return (
     <HelmetProvider>
       <Helmet>
@@ -162,30 +170,32 @@ const Dashboard = () => {
         <meta name="viewport" content="width=device-width, initial-scale=0.50, maximum-scale=1.0, user-scalable=yes" />
       </Helmet>
 
-      <div className="flex flex-row h-[91vh] overflow-auto bg-white justify-center">
+      <div className="flex flex-row h-[91vh] overflow-auto bg-white-100 justify-center">
         <div className="col-span-2 space-y-4 w-[50rem]">
-          <div className="md:col-span-2 space-y-4 w-full md:w-[50rem]">
-            <div className="space-y-4">
-              {posts.map((post, index) => (
-                <Post
-                  key={post.id}
-                  post={post}
-                  user={user}
-                  handleEdit={handleEdit}
-                  handleDelete={handleDelete}
-                  handleLike={handleLike}
-                  togglePostDropdown={togglePostDropdown}
-                  openPostDropdowns={openPostDropdowns}
-                  editingPostId={editingPostId}
-                  editContent={editContent}
-                  handleEditContentChange={handleEditContentChange}
-                  handleUpdate={handleUpdate}
-                  handleCancel={handleCancel}
-                  lastPostElementRef={index === posts.length - 1 ? lastPostElementRef : null}
-                />
-              ))}
-            </div>
-          </div>
+          <Masonry
+            breakpointCols={breakpointColumnsObj}
+            className="my-masonry-grid"
+            columnClassName="my-masonry-grid_column"
+          >
+            {posts.map((post, index) => (
+              <Post
+                key={post.id}
+                post={post}
+                user={user}
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+                handleLike={handleLike}
+                togglePostDropdown={togglePostDropdown}
+                openPostDropdowns={openPostDropdowns}
+                editingPostId={editingPostId}
+                editContent={editContent}
+                handleEditContentChange={handleEditContentChange}
+                handleUpdate={handleUpdate}
+                handleCancel={handleCancel}
+                lastPostElementRef={index === posts.length - 1 ? lastPostElementRef : null}
+              />
+            ))}
+          </Masonry>
         </div>
       </div>
     </HelmetProvider>

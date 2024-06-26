@@ -17,8 +17,8 @@ const Post = ({
   handleCancel,
   lastPostElementRef
 }) => (
-  <div ref={lastPostElementRef} className="mb-4 p-4 rounded-xl mt-6 ml-15 mx-auto w-full md:w-[40rem] shadow-md bg-gray-200 text-black">
-    <div className="items-center mb-2 flex mt-18">
+  <div ref={lastPostElementRef} className="mb-4 p-4 rounded-xl shadow-md bg-gray-200 text-black">
+    <div className="items-center mb-2 flex">
       {post.user?.profile_image_url ? (
         <img src={post.user.profile_image_url} alt="Profile" className="w-10 h-10 rounded-full mr-4" />
       ) : (
@@ -26,7 +26,7 @@ const Post = ({
           No Image
         </div>
       )}
-      <div className="text-sm mb-5">
+      <div className="text-sm">
         <p className="font-bold text-lg text-black">
           {post.user?.first_name} {post.user?.last_name}
         </p>
@@ -96,7 +96,7 @@ const Post = ({
           <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
         </svg>}
       </button>
-      <span className="mt-2 -ml-64">{post.likes_count}{post.likes_count === 2 ? '' : ''}</span>
+      <span className="mt-2">{post.likes_count}</span>
     </div>
   </div>
 );

@@ -2,22 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Light mode */
-.light {
-  --bg-color: #ffffff;
-  --text-color: #000000;
-  --input-bg-color: #f0f0f0;
-  --input-border-color: #cccccc;
-}
-
-/* Dark mode */
-.dark {
-  --bg-color: #1a202c;
-  --text-color: #ffffff;
-  --input-bg-color: #2d3748;
-  --input-border-color: #4a5568;
-}
-
 /* Apply the variables */
 body {
   @apply bg-white text-black;
@@ -42,3 +26,19 @@ body.dark input, body.dark textarea {
   background-color: var(--input-bg-color);
   border-color: var(--input-border-color);
 }
+
+.my-masonry-grid {
+  display: flex;
+  margin-left: -30px; /* Adjust the gutter size */
+  width: auto;
+}
+.my-masonry-grid_column {
+  padding-left: 30px; /* Adjust the gutter size */
+  background-clip: padding-box;
+}
+
+/* Optional: Styling for individual posts within the masonry grid */
+.my-masonry-grid_column > div {
+  margin-bottom: 30px; /* Adjust the bottom margin */
+}
+  
