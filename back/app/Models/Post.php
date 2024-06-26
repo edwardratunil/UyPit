@@ -11,7 +11,8 @@ class Post extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $fillable = ['user_id', 'content'];
+    protected $fillable = ['user_id', 'content', 'title', 'image_path'];
+
 
     public function user()
     {

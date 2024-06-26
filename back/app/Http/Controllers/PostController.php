@@ -9,34 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    // public function index()
-    // {
-    //     $user = Auth::user();
-    //     $posts = Post::with(['user', 'comments.user', 'likes'])
-    //         ->whereIn('user_id', $user->follows()->pluck('followed_user_id'))
-    //         ->orWhere('user_id', $user->id)
-    //         ->orderBy('created_at', 'desc')
-    //         ->paginate(5);
-
-    //     $posts->each(function ($post) use ($user) {
-    //         $post->likes_count = $post->likes()->count();
-    //         $post->liked = $post->likes()->where('user_id', $user->id)->exists();
-    //     });
-
-    //     return response()->json($posts);
-    // }
-
-    // public function show($id)
-    // {
-    //     $post = Post::with(['user', 'comments.user'])
-    //         ->findOrFail($id);
-
-    //     $post->likes_count = $post->likes()->count();
-    //     $post->liked = $post->likes()->where('user_id', Auth::id())->exists();
-
-    //     return response()->json($post);
-    // }
-
     public function index()
     {
         $user = Auth::user();
@@ -53,6 +25,8 @@ class PostController extends Controller
             });
             $post->likes_count = $post->likes()->count();
             $post->liked = $post->likes()->where('user_id', $user->id)->exists();
+            // Adding full URL for the image
+            $post->image_url = $post->image_path ? asset('storage/' . $post->image_path) : null;
         });
 
         return response()->json($posts);
@@ -76,21 +50,29 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'content' => 'required|string',
+            'title' => 'required|string|max:255',
+            'content' => 'sometimes|string',  // Changed to sometimes to make it optional
+            'file' => 'nullable|image|max:2048',
         ]);
+
+        $imagePath = null;
+        if ($request->hasFile('file')) {
+            $imagePath = $request->file('file')->store('posts_images', 'public');
+        }
 
         $post = Post::create([
             'user_id' => Auth::id(),
-            'content' => $validated['content'],
+            'title' => $validated['title'],
+            'content' => $validated['content'] ?? null,  // Use null if not provided
+            'image_path' => $imagePath,
         ]);
 
-        $post->load('user');
-        $post->user->profile_image_url = $post->user->profile_image_url;
-        $post->likes_count = 0;
-        $post->liked = false;
+        // Adding full URL for the image
+        $post->image_url = $imagePath ? asset('storage/' . $imagePath) : null;
 
         return response()->json($post, 201);
     }
+
 
     public function update(Request $request, Post $post)
     {
