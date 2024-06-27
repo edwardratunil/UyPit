@@ -9,7 +9,6 @@ const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
@@ -21,14 +20,9 @@ const Login = ({ onLogin }) => {
       const response = await axiosInstance.post('/login', { email, password });
       const { token, user } = response.data;
 
-      // Save the token and user info in local storage or session storage
-      if (rememberMe) {
-        localStorage.setItem('authToken', token);
-        localStorage.setItem('user', JSON.stringify(user));
-      } else {
-        sessionStorage.setItem('authToken', token);
-        sessionStorage.setItem('user', JSON.stringify(user));
-      }
+      // Save the token and user info in local storage
+      localStorage.setItem('authToken', token);
+      localStorage.setItem('user', JSON.stringify(user));
 
       onLogin(); // Call the onLogin prop to update the isLoggedIn state in the App component
 
@@ -101,19 +95,6 @@ const Login = ({ onLogin }) => {
                   </button>
                 </div>
                 {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password[0]}</p>}
-              </div>
-
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  id="remember-me"
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
-                  className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                  Remember me
-                </label>
               </div>
 
               <button
